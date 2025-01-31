@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Manos</title>
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Updated color theme */
+        :root {
+            --primary-color: #2C3E50; /* Dark blue */
+            --secondary-color: #F39C12; /* Gold */
+            --background-light: #f4f4f9;
+            --background-dark: #1A1A2E;
+            --text-light: #333;
+            --text-dark: #fff;
+            --text-dark-mode: #fafafa; /* Light text color for dark mode */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            transition: background-color 0.5s, color 0.5s;
+            color: var(--text-light);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            margin-top: 70px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+
+        .button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .dark-mode {
+            background-color: var(--background-dark);
+            color: var(--text-dark-mode);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 100px;
+        }
+
+        /* Updated action button style */
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Style for the gift icon */
+        .gift-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        .gift-icon:hover {
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manos</h1>
+        <nav>
+            <a th:href="@{/about}">About Us</a>
+            <a th:href="@{/donors/create}">Create Donor</a>
+            <a th:href="@{/recipients/create}">Create Recipient</a>
+            
+        </nav>
+        <button id="darkModeToggle" class="toggle-btn">
+            <i id="themeIcon" class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <div class="container">
+        <div id="welcomeCard" class="card">
+            <h3>Welcome to the Manos Charity Platform!</h3>
+            <p>Use this platform to manage donations, donors, and recipients with ease.</p>
+
+            <div>
+                <button class="action-btn" onclick="window.location.href='/donors/create'">Become a Donor</button>
+                <button class="action-btn" onclick="window.location.href='/recipients/create'">Become a Recipient</button>
+            </div>
+
+            <!-- Gift Icon as a button -->
+            <i class="gift-icon fas fa-gift" onclick="showMessage(event)"></i>
+            <p id="greeting" style="color: var(--primary-color); margin-top: 10px; font-weight: bold; display: none;">Thank you for supporting Manos!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Manos Charity | All rights reserved.</p>
+        <p id="live-time">Current Time: --:--:--</p>
+    </footer>
+
+    <script>
+        // Fade-in effect
+        document.addEventListener("DOMContentLoaded", function () {
+            let card = document.getElementById("welcomeCard");
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        });
+
+        // Show a greeting message
+        function showMessage(event) {
+            let message = document.getElementById("greeting");
+            message.style.display = "block";
+            message.style.opacity = "0";
+            setTimeout(() => {
+                message.style.opacity = "1";
+                message.style.transition = "opacity 1s ease-in";
+            }, 100);
+        }
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const themeIcon = document.getElementById("themeIcon");
+
+        darkModeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+
+            if (document.body.classList.contains("dark-mode")) {
+                themeIcon.classList.replace("fa-moon", "fa-sun");
+            } else {
+                themeIcon.classList.replace("fa-sun", "fa-moon");
+            }
+        });
+
+        // Live time update
+        function updateTime() {
+            let now = new Date();
+            let timeString = now.toLocaleTimeString();
+            document.getElementById("live-time").textContent = "Current Time: " + timeString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipient Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Recipient Dashboard</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/recipients/create">Request Donation</a> |
+            <a href="/recipients/status">View Request Status</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <h2>Your Donation Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Request Type</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody id="request-history">
+                <!-- Donation request history loads dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Manos Charity Management</p>
+    </footer>
+
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

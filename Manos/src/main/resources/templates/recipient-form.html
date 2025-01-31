@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Recipient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            height: 80vh;
+            overflow-y: auto; /* Makes the container scrollable */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        h1 {
+            color: #2C3E50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            color: #34495E;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #34495E;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #F39C12;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #E67E22;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .alert.error {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Create New Recipient</h1>
+        <form action="/recipients/create" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+
+            <label for="address">Address</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="requestedItem">Requested Item</label>
+            <input type="text" id="requestedItem" name="requestedItem" required>
+
+            <label for="urgencyLevel">Urgency Level</label>
+            <select id="urgencyLevel" name="urgencyLevel" required>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="Individual">Individual</option>
+                <option value="Family">Family</option>
+                <option value="Community">Community</option>
+            </select>
+
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                
+            </select>
+
+            <label for="ageGroup">Age Group</label>
+            <select id="ageGroup" name="ageGroup" required>
+                <option value="Child">Child</option>
+                <option value="Adult">Adult</option>
+                <option value="Senior">Senior</option>
+            </select>
+
+            <label for="familyMembers">Family Members</label>
+            <input type="number" id="familyMembers" name="familyMembers" required>
+
+            <label for="donationMode">Donation Mode</label>
+            <select id="donationMode" name="donationMode" required>
+                <option value="Monetary">Monetary</option>
+                <option value="Goods">Goods</option>
+            </select>
+
+            <label for="proofDocuments">Proof Documents</label>
+            <input type="text" id="proofDocuments" name="proofDocuments">
+
+            <label for="locationCoordinates">Location</label>
+            <input type="text" id="locationCoordinates" name="locationCoordinates" required>
+
+            
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+            </select>
+
+            <label for="specificRequest">Specific Request</label>
+            <input type="text" id="specificRequest" name="specificRequest" required>
+
+            <button type="submit">Create Recipient</button>
+        </form>
+
+        <!-- Success message -->
+        <div th:if="${message}" class="alert alert-success">
+            <p th:text="${message}"></p>
+        </div>
+
+        <!-- Error message (if applicable) -->
+        <div th:if="${error}" class="alert error">
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+
+</body>
+</html>

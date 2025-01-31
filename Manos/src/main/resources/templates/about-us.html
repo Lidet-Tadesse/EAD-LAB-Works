@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Manos</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2C3E50;
+            --secondary-color: #F39C12;
+            --highlight-color: #3498DB;
+            --text-light: #fff;
+            --text-dark: #333;
+            --card-bg-color: #fff;
+            --bg-color: #f7f9fc;
+            --box-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* About Us Section */
+        .about-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            justify-items: center;
+        }
+
+        /* Card Design */
+        .team-member {
+            background-color: var(--card-bg-color);
+            width: 100%;
+            max-width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--box-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+
+        .team-member-content {
+            padding: 20px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .team-member h4 {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .team-member p {
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .team-member-description {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-top: 10px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
+        }
+
+        .team-member:hover .team-member-description {
+            opacity: 1;
+            max-height: 100px;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+
+        .back-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: var(--highlight-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>About Us</h1>
+        <p>We are a group of passionate individuals working to make a difference.</p>
+    </header>
+
+    <div class="about-container">
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <img src="https://via.placeholder.com/320x200" alt="Team Member 1">
+            <div class="team-member-content">
+                <h4>Gui Doe</h4>
+                <p>CEO & Founder</p>
+                <div class="team-member-description">
+                    <p>Gui is the visionary leader behind Manos, with a deep commitment to creating meaningful social change.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="team-member">
+            <img src="https://via.placeholder.com/320x200" alt="Team Member 2">
+            <div class="team-member-content">
+                <h4>Jane Smh</h4>
+                <p>COO</p>
+                <div class="team-member-description">
+                    <p>Jane manages the day-to-day operations, ensuring that the platform is always running smoothly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="team-member">
+            <img src="https://via.placeholder.com/320x200" alt="Team Member 3">
+            <div class="team-member-content">
+                <h4>Uid Json</h4>
+                <p>CTO</p>
+                <div class="team-member-description">
+                    <p>Uid leads the tech team, ensuring our platform is scalable, secure, and up to date with the latest technology.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <button class="back-btn" onclick="window.history.back();">Back to Home</button>
+    </footer>
+
+</body>
+</html>

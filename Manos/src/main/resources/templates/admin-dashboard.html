@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Base styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Table Styling */
+        table {
+            width: 90%;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Admin Dashboard</h2>
+
+    <h3>Donors</h3>
+    <table id="donor-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Amount Donated</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Donation Date</th>
+                <th>Donation Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Donors will be inserted here -->
+        </tbody>
+    </table>
+
+    <h3>Recipients</h3>
+    <table id="recipient-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Requested Item</th>
+                <th>Urgency Level</th>
+                <th>Category</th>
+                <th>Gender</th>
+                <th>Age Group</th>
+                <th>Family Members</th>
+                <th>Donation Mode</th>
+                <th>Status</th>
+                <th>Specific Request</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Recipients will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch and display donor and recipient data
+        function fetchData() {
+            $.get("/admin/data", function(data) {
+                // Populate donor table
+                var donorTable = $('#donor-table tbody');
+                donorTable.empty();
+                data.donors.forEach(function(donor) {
+                    donorTable.append(
+                        '<tr>' +
+                        '<td>' + donor.name + '</td>' +
+                        '<td>' + donor.email + '</td>' +
+                        '<td>' + donor.amountDonated + '</td>' +
+                        '<td>' + donor.phoneNumber + '</td>' +
+                        '<td>' + donor.address + '</td>' +
+                        '<td>' + new Date(donor.donationDate).toLocaleDateString() + '</td>' +
+                        '<td>' + donor.donationType + '</td>' +
+                        '</tr>'
+                    );
+                });
+
+                // Populate recipient table
+                var recipientTable = $('#recipient-table tbody');
+                recipientTable.empty();
+                data.recipients.forEach(function(recipient) {
+                    recipientTable.append(
+                        '<tr>' +
+                        '<td>' + recipient.name + '</td>' +
+                        '<td>' + recipient.email + '</td>' +
+                        '<td>' + recipient.phoneNumber + '</td>' +
+                        '<td>' + recipient.address + '</td>' +
+                        '<td>' + recipient.requestedItem + '</td>' +
+                        '<td>' + recipient.urgencyLevel + '</td>' +
+                        '<td>' + recipient.category + '</td>' +
+                        '<td>' + recipient.gender + '</td>' +
+                        '<td>' + recipient.ageGroup + '</td>' +
+                        '<td>' + recipient.familyMembers + '</td>' +
+                        '<td>' + recipient.donationMode + '</td>' +
+                        '<td>' + recipient.status + '</td>' +
+                        '<td>' + recipient.specificRequest + '</td>' +
+                        '</tr>'
+                    );
+                });
+            });
+        }
+
+        // Fetch data when the page loads
+        $(document).ready(function() {
+            fetchData();
+        });
+    </script>
+
+</body>
+</html>

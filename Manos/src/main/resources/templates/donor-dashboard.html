@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #2C3E50; /* Dark blue */
+            --secondary-color: #F39C12; /* Gold */
+            --background-light: #f4f4f9;
+            --background-dark: #1A1A2E;
+            --text-light: #333;
+            --text-dark: #fff;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header nav {
+            margin-top: 10px;
+        }
+
+        header nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--text-light);
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Donor Dashboard</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/donors/create">Make a Donation</a> |
+            <a href="/donors/history">Donation History</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <h2>Your Donation Summary</h2>
+        <p>Total Donations: <span id="total-donations" style="font-weight: bold; color: var(--primary-color);">0</span></p>
+        <p>People Helped: <span id="people-helped" style="font-weight: bold; color: var(--primary-color);">0</span></p>
+
+        <h2>Recent Donations</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Donation Type</th>
+                    <th>Amount/Quantity</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="donation-history">
+                <!-- Donation history loads dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Manos Charity Management | All rights reserved.</p>
+    </footer>
+
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
