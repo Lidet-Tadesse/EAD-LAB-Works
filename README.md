@@ -32,7 +32,7 @@ Backend: Spring Boot
 
 Frontend: HTML, CSS, JavaScript
 
-Database: MySQL (MANOS)
+Database: MySQL (manos_db)
 
 Version Control: Git, GitHub
 
@@ -40,4 +40,4 @@ Version Control: Git, GitHub
 
 To clone the repository,use the following command:
 
-         https://github.com/Lidet-Tadesse/EAD-LAB-Works.git
+        https://github.com/Lidet-Tadesse/EAD-LAB-Works.git
