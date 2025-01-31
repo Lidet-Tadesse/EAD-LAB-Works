@@ -39,4 +39,5 @@ Version Control: Git, GitHub
 # Clone the Repository
 
 To clone the repository,use the following command:
-https://github.com/Lidet-Tadesse/EAD-LAB-Works.git
+
+         https://github.com/Lidet-Tadesse/EAD-LAB-Works.git
