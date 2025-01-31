@@ -4,11 +4,11 @@
 
 # UGR/8824/14
 
-. Manos - Charity Management System
+         Manos - Charity Management System
 
-Manos is a web-based charity management system that allows donors and recipients to interact with the platform. The system helps donors contribute to various causes, while recipients can apply for assistance through dedicated forms. The project is built using Spring Boot for the backend, and HTML, CSS, and JavaScript for the frontend. It is connected to a MySQL database called MANOS for storing data.
+Manos is a web-based charity management system that allows donors and recipients to interact with the platform. The system helps donors contribute to various causes, while recipients can apply for assistance through dedicated forms. The project is built using Spring Boot for the backend, and HTML, CSS, and JavaScript for the frontend. It is connected to a MySQL database called manos_db for storing data.
 
-Features
+         Features
 
 Donor View:
 
@@ -26,7 +26,7 @@ Can manage and process all donation-related activities.
 Can approve or reject recipient requests and track the status of donations.
 Admin can generate reports for overall platform activity and donations.
 
-Technology Stack
+        Technology Stack
 
 Backend: Spring Boot
 
@@ -36,7 +36,7 @@ Database: MySQL (MANOS)
 
 Version Control: Git, GitHub
 
-Clone the Repository
+       Clone the Repository
 
 To clone the repository,
 
