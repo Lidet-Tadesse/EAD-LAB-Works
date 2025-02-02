@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manos Testimonials</title>
+
+    <!-- Google Font for Better Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS Styling -->
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2C3E50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .testimonial-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-card h3 {
+            color: #2C3E50;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #1A1A2E;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Testimonials</h1>
+    </header>
+
+    <div class="testimonial-container" id="testimonialContainer">
+        <!-- Testimonials will be dynamically added here -->
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Manos Charity | All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fetch testimonials from the backend
+        fetch('/api/testimonials')
+            .then(response => response.json()) // Parse JSON data from the API response
+            .then(data => {
+                const testimonialContainer = document.getElementById('testimonialContainer');
+
+                // Iterate over each testimonial and create a card for it
+                data.forEach(testimonial => {
+                    const testimonialCard = document.createElement('div');
+                    testimonialCard.classList.add('testimonial-card');
+
+                    // Add testimonial content
+                    testimonialCard.innerHTML = `
+                        <h3>${testimonial.title}</h3>
+                        <p>${testimonial.description}</p>
+                    `;
+
+                    // Append the card to the container
+                    testimonialContainer.appendChild(testimonialCard);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching testimonials:', error);
+            });
+    </script>
+
+</body>
+</html>

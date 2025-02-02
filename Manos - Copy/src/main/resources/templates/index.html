@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Manos</title>
+    
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* Updated color theme */
+        :root {
+            --primary-color: #2C3E50; /* Dark blue */
+            --secondary-color: #F39C12; /* Gold */
+            --background-light: #f4f4f9;
+            --background-dark: #1A1A2E;
+            --text-light: #333;
+            --text-dark: #fff;
+            --text-dark-mode: #fafafa; /* Light text color for dark mode */
+            --card-bg-light: white;
+            --card-bg-dark: #333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            transition: background-color 0.5s, color 0.5s;
+            color: var(--text-light);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .toggle-btn:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg-light);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .dark-mode .card {
+            background-color: var(--card-bg-dark);
+            color: var(--text-dark-mode);
+        }
+
+        .action-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .action-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .gift-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        .gift-icon:hover {
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+
+        .testimonials {
+            padding: 40px;
+            background-color: var(--background-dark);
+            color: white;
+            text-align: center;
+        }
+
+        .testimonial-banner {
+            background-color: var(--primary-color);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-carousel {
+            padding: 40px;
+            background-color: var(--background-light);
+            text-align: center;
+        }
+
+        .carousel {
+            display: flex;
+            justify-content: space-around;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonial {
+            flex: 0 0 30%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonial p {
+            font-size: 18px;
+        }
+
+        .testimonial span {
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+
+        .achievements {
+            padding: 40px;
+            background-color: var(--background-light);
+            text-align: center;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .social-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        footer .social-link:hover {
+            color: var(--secondary-color);
+        }
+
+        footer .social-icons {
+            margin-bottom: 10px;
+        }
+
+        footer .social-icons a {
+            font-size: 24px;
+        }
+
+        /* Share Your Story Button Styling */
+        #shareStoryBtn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        #shareStoryBtn:hover {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Manos</h1>
+        <nav>
+            <a href="/about">About Us</a>
+            <a href="/donors/create">Create Donor</a>
+            <a href="/recipients/create">Create Recipient</a>
+            <a href="/donors/12/donations">Donor History</a>
+            <a href="/testimonials">Testimonials</a>
+        </nav>
+        <button id="darkModeToggle" class="toggle-btn">
+            <i id="themeIcon" class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <div class="container">
+        <div id="welcomeCard" class="card">
+            <h3>Welcome to the Manos Charity Platform!</h3>
+            <p id="welcomeText">Use this platform to manage donations, donors, and recipients with ease.</p>
+
+            <div>
+                <button class="action-btn" onclick="window.location.href='/donors/create'">Become a Donor</button>
+                <button class="action-btn" onclick="window.location.href='/recipients/create'">Become a Recipient</button>
+            </div>
+
+            <i class="gift-icon fas fa-gift" onclick="showMessage(event)"></i>
+            <p id="greeting" style="color: var(--primary-color); margin-top: 10px; font-weight: bold; display: none;">Thank you for supporting Manos!</p>
+        </div>
+    </div>
+
+    <!-- Testimonial Banner -->
+    <div class="testimonial-banner">
+        <h1>TESTIMONIALS</h1>
+        <h3>Real Stories from Real People</h3>
+        <p>Our community of donors and recipients share their experiences to inspire others to contribute. Together, we can make a difference!</p>
+    </div>
+
+    <!-- Testimonial Section with Carousel --
+    <section class="testimonial-carousel">
+        <h2>What People Are Saying</h2>
+
+        <div class="carousel">
+            <!-- Testimonials will be dynamically loaded here -->
+        </div>
+        <div style="display: flex; gap: 30px; margin-top: 50px; justify-content: center; align-items: center;">
+            <!-- Card 1 -->
+            <div style="width: 250px; height: 300px; padding: 20px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.15); text-align: center; border-radius: 12px; border-top: 5px solid #007bff;">
+                <h4 style="font-size: 30px; font-weight: bold; color: #333;">A Cause Worth Supporting</h4>
+                <p  style="font-size: 16px; font-weight: bold; color: #333;">"Manos Charity has truly made a difference in so many lives. Seeing the impact firsthand has inspired me to keep donating. Every contribution counts!"</p>
+
+            </div>
+        
+            <!-- Card 2 -->
+            <div style="width: 250px; height: 300px; padding: 20px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.15); text-align: center; border-radius: 12px; border-top: 5px solid #28a745;">
+                <h4 style="font-size: 30px; font-weight: bold; color: #333;">Hope Restored</h4>
+                <p  style="font-size: 16px; font-weight: bold; color: #333;">"I was struggling to provide for my family, but thanks to Manos, I received the help I needed. This organization is a beacon of hope!"</p>
+            </div>
+        
+            <!-- Card 3 -->
+            <div style="width: 250px; height: 300px; padding: 20px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.15); text-align: center; border-radius: 12px; border-top: 5px solid #ff5733;">
+                <h4 style="font-size: 30px; font-weight: bold; color: #333;">A Life-Changing Experience</h4>
+                <p  style="font-size: 16px; font-weight: bold; color: #333;">"Volunteering with Manos has been the most rewarding experience of my life. The love and care this team puts into helping others is beyond words."</p>
+            </div>
+        </div>
+        
+    <!-- Share Your Story Button -->
+    <div style="text-align: center;">
+        <button id="shareStoryBtn">Share Your Story</button>
+    </div>
+
+    <!-- Testimonial Form -->
+    <div id="testimonialForm" style="display: none; text-align: center;">
+        <form id="testimonialFormElement">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        
+            <button type="button" onclick="submitTestimonial()">Submit Testimonial</button>
+        </form>
+    </div>
+
+    
+
+    <footer>
+        <div class="social-icons">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2025 Manos Charity | All rights reserved.</p>
+        <p id="live-time">Current time: <span id="current-time"></span></p>
+    </footer>
+
+    <script>
+        // Toggle Dark Mode
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const themeIcon = document.getElementById("themeIcon");
+
+        darkModeToggle.addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                themeIcon.classList.remove("fa-moon");
+                themeIcon.classList.add("fa-sun");
+            } else {
+                themeIcon.classList.remove("fa-sun");
+                themeIcon.classList.add("fa-moon");
+            }
+        });
+
+        // Show the 'Share Your Story' form
+        document.getElementById('shareStoryBtn').onclick = function() {
+            document.getElementById('testimonialForm').style.display = 'block';
+        };
+
+        // Handle submitting testimonial
+        function submitTestimonial() {
+            const title = document.getElementById("title").value;
+            const description = document.getElementById("description").value;
+
+            if (!title || !description) {
+                alert("Both title and description are required!");
+                return;
+            }
+
+            const testimonialData = {
+                title: title,
+                description: description
+            };
+
+            // Perform a POST request to the backend to submit the testimonial
+            fetch('/api/testimonials', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(testimonialData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Testimonial submitted successfully!");
+                    // Optionally, close the form after submission
+                    document.getElementById("testimonialForm").style.display = "none";
+                    // Optionally, refresh testimonials or update the UI
+                    fetchTestimonials();
+                } else {
+                    alert("Failed to submit testimonial.");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("An error occurred while submitting your testimonial.");
+            });
+        }
+
+        // Fetch testimonials (this could be used to refresh or update the testimonials on the page)
+        function fetchTestimonials() {
+            fetch('/api/testimonials')
+                .then(response => response.json())
+                .then(data => {
+                    const testimonialContainer = document.querySelector(".carousel");
+                    testimonialContainer.innerHTML = ''; // Clear existing testimonials
+
+                    data.forEach(testimonial => {
+                        const newTestimonial = document.createElement('div');
+                        newTestimonial.classList.add('testimonial');
+                        newTestimonial.innerHTML = `<p>"${testimonial.description}"</p><span>- ${testimonial.title}</span>`;
+                        testimonialContainer.appendChild(newTestimonial);
+                    });
+                })
+                .catch(error => console.error('Error fetching testimonials:', error));
+        }
+
+        // Show a message when the gift icon is clicked
+        function showMessage(event) {
+            const greeting = document.getElementById("greeting");
+            greeting.style.display = "block";
+        }
+
+        // Update the current time in the footer
+        setInterval(() => {
+            const currentTime = new Date().toLocaleTimeString();
+            document.getElementById("current-time").textContent = currentTime;
+        }, 1000);
+    </script>
+
+</body>
+</html>

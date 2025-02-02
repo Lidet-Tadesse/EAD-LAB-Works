@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor History</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your custom styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Font Awesome for Social Icons -->
+    <style>
+        :root {
+            --primary-color: #2C3E50; /* Dark blue */
+            --secondary-color: #F39C12; /* Gold */
+            --background-light: #f4f4f9;
+            --background-dark: #1A1A2E;
+            --text-light: #333;
+            --text-dark: #fff;
+            --text-dark-mode: #fafafa; /* Light text color for dark mode */
+            --card-bg-light: white;
+            --card-bg-dark: #333;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-dark-mode);
+            background-color: var(--secondary-color); /* Gold color on hover */
+        }
+
+        .container {
+            padding: 2em;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--card-bg-light);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+        }
+
+        tr:hover {
+            background-color: var(--background-light);
+        }
+
+        .no-history {
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 16px;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer {
+            background-color: var(--background-dark);
+            color: var(--text-dark-mode);
+            text-align: center;
+            padding: 2em 0;
+            margin-top: 40px;
+        }
+
+        .social-icons {
+            margin-bottom: 1em;
+        }
+
+        .social-link {
+            margin: 0 10px;
+            color: var(--text-dark-mode);
+            text-decoration: none;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--secondary-color); /* Gold color on hover */
+        }
+
+        #live-time {
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        function updateTime() {
+            const currentTime = new Date();
+            const hours = currentTime.getHours().toString().padStart(2, '0');
+            const minutes = currentTime.getMinutes().toString().padStart(2, '0');
+            const seconds = currentTime.getSeconds().toString().padStart(2, '0');
+            document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateTime, 1000);  // Update every second
+        window.onload = updateTime;  // Initial load of time
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Manos Charity</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/donors/create">Create Donor</a></li>
+                <li><a href="/donors/12/donations">Your Donation History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Donation History for Donor: <span th:text="${donor.name}"></span></h2>
+
+        <div th:if="${donorHistory.isEmpty()}" class="no-history">
+            <p>No donation history found for this donor.</p>
+        </div>
+
+        <table th:if="${not donorHistory.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="history : ${donorHistory}">
+                    <td th:text="${history.amount}"></td>
+                    <td th:text="${history.donationMethod != null ? history.donationMethod : 'Unknown'}"></td>
+                    <td th:text="${history.donationMessage != null ? history.donationMessage : 'No message provided'}"></td>
+                    <td th:text="${history.donationDate}"></td>
+                </tr>
+            </tbody>
+            
+        </table>
+
+        <a href="/donors/create" class="back-link">Back to Donor List</a>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p>&copy; 2025 Manos Charity | All rights reserved.</p>
+        <p id="live-time">Current time: <span id="current-time"></span></p>
+    </footer>
+
+</body>
+</html>
